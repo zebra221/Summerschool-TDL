@@ -3,11 +3,12 @@ require_relative '../../features/pages/base'
 class HomePage < BasePage
   attr_accessor :homeButton, :friendsTab, :friendTag, :voiceCallButton
   attr_accessor :chatMessageInput, :leaveCallButton, :userSettings, :logOutButton
+  attr_accessor :serverDiscoveryButton, :serverSearch, :firstServer, :joinServer
 
   def initialize
     @friendsTab = Element.new(:xpath,"//div[text()='Friends']")
 
-    @friendTag = Element.new(:xpath,"//span[text()='#']")
+    @friendTag = Element.new(:css,"[aria-label='Kristers K']")
     
     @leaveCallButton = Element.new(:xpath,"//*[text()='Leave Call']")
     
@@ -22,6 +23,13 @@ class HomePage < BasePage
     @chatMessageInput = Element.new(:css,"textarea:first-of-type")
     
     @userSettings = Element.new(:css,"[aria-label='User Settings']")
+
+    @serverDiscoveryButton = Element.new(:css,"[name='Search']")
+    @serverSearch = Element.new(:css,"[aria-label='Search popular servers']")
+    @firstServer = Element.new(:xpath,"(//div[starts-with(@class, 'splash')])[1]")
+    @joinServer = Element.new(:xpath, "(//button[starts-with(@class, 'button')])[7]")
+
+
   end
 
   def fill_form(user)
